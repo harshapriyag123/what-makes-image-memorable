@@ -6,3 +6,4 @@ A web-based game to test image memorability.  This is based on the visual memory
 Credits
 -------
 * favicon.ico from FatCow Web Hosting's Farm-Fresh Web icon pack, downloaded from [findicons.com](http://findicons.com/icon/164121/lightbulb?id=426957)
+* [HTML5 Boilerplate](http://html5boilerplate.com/) for the initial site
