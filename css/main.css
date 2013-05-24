@@ -130,10 +130,30 @@ h3 {
 .centeredtext {
     text-align: center;
 }
+#currentimagecontainer {
+    margin: auto;
+    text-align: center;
+    width: 510px;
+    height: 510px;
+    position: relative;
+}
 #currentimage {
     border: 5px solid #ccc;
-    margin: auto;
-    display: block;
+    max-width: 500px;
+    max-height: 500px;
+}
+#beforelevel {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+}
+#seen {
+    background: #ccc;
+    border: 5px solid #999;
+    position: absolute;
+    top: 100px;
+    width: 500px;
+    font-size: 3em;
 }
 
 

@@ -22,7 +22,7 @@
             <h2><img id="logo" src="img/logo.png" style="margin-right:10px;" />Visual Memory Game</h2>
 
             <div id="welcome">
-                <p>Hey there!  This game will test your visual memory abilities.  You'll also help researchers determine exactly what makes an image memorable.  What exactly makes one image more memorable than another?  We hope to find out.</p>
+                <p>Hey there!  This game will test your visual memory abilities.  You'll also help researchers determine exactly what makes an image memorable.  What exactly makes one image more memorable than another?  We hope to find answers to both questions.</p>
                 <h3>Instructions</h3>
                 <p>You will be presented with a sequence of images, one at a time.  Each image will be displayed for a short period of time, and there will be a gap between images.  After an image has been displayed, you must decide whether or not you have seen the image before.  If so, press the <em>space bar</em> before the next image is displayed.  Otherwise, do nothing.</p>
                 <p>The game is split up into levels.  Play as many as you would like!  You may quit at any time.  Thanks for playing and <em>good luck</em>!</p>
@@ -31,7 +31,14 @@
 
             <div id="game">
                 <h3>Level 1</h3>
-                <p><img id="currentimage" /></p>
+                <div id="currentimagecontainer">
+                    <img id="currentimage" />
+                    <div id="beforelevel">
+                        Press the <em>space bar</em> to start the level.<br />
+                        Then use the <em>space bar</em> to mark images that you've seen before.
+                    </div>
+                    <div id="seen">SEEN <span style="color: #E42217">&#x2717;</span></div>
+                </div>
                 <p class="centeredtext"><input type="button" id="quit" value="Quit"></input></p>
             </div>
 
