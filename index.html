@@ -19,11 +19,26 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
         <div id="container">
-            <h2>Visual Memory Game</h2>
-            <p>Hello!  We appreciate you playing this game to help us better understand what makes some images more memorable than others.</p>
-            <h3>Instructions</h3>
-            <p>Images will be displayed one-by-one, for a second each.  Some images will be displayed twice.  Press the space bar if you've seen the image before.</p>
-            <p>The game is split up into levels.  Play as many as you would like!  You may quit at any time.  Thanks for playing!</p>
+            <h2><img src="img/logo.png" style="margin-right:10px;" />Visual Memory Game</h2>
+
+            <div id="welcome">
+                <p>Hey there!  This game will test your visual memory abilities.  You'll also help researchers determine exactly what makes an image memorable.  What exactly makes one image more memorable than another?  We hope to find out.</p>
+                <h3>Instructions</h3>
+                <p>You will be presented with a sequence of images, one at a time.  Each image will be displayed for a short period of time, and there will be a gap between images.  After an image has been displayed, you must decide whether or not you have seen the image before.  If so, press the <em>space bar</em> before the next image is displayed.  Otherwise, do nothing.</p>
+                <p>The game is split up into levels.  Play as many as you would like!  You may quit at any time.  Thanks for playing and <em>good luck</em>!</p>
+                <p class="centeredtext"><input type="button" id="getstarted" value="Get Started!"></input></p>
+            </div>
+
+            <div id="game">
+                <h3>Level 1</h3>
+                <p><img id="currentimage" /></p>
+                <p class="centeredtext"><input type="button" id="quit" value="Quit"></input></p>
+            </div>
+
+            <div id="thanks">
+                <p>Thanks for playing!</p>
+            </div>
+
             <div id="footer">Kyle Krafka&nbsp;&nbsp;|&nbsp;&nbsp;University of Georgia&nbsp;&nbsp;|&nbsp;&nbsp;2013</div>
         </div>
 
