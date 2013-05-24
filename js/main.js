@@ -51,7 +51,8 @@ $(document).ready(function() {
 });
 
 function playGame(imageURLs, displayTime, gapTime) {
-    $('#currentimage').queue(function() { gameInProgress = true; $('#beforelevel').hide(); $.dequeue(this); });
+    // TODO: Add a loading screen while images preload?  (And ignore space bar?)
+    $('#currentimage').queue(function() { gameInProgress = true; $('#beforelevel').hide(); preload(imageURLs); $.dequeue(this); });
     // Display all of the imagess
     $.each(imageURLs, function(index, value) {
         $('#currentimage')
@@ -64,5 +65,13 @@ function playGame(imageURLs, displayTime, gapTime) {
             .queue(function() { $('#seen').hide(); $.dequeue(this); });
     });
     $('#currentimage').queue(function() { gameInProgress = false; $('#beforelevel').show(); $.dequeue(this); });
+}
 
+// From http://stackoverflow.com/questions/476679/preloading-images-with-jquery
+function preload(imageURLs) {
+    $(imageURLs).each(function(){
+        $('<img/>')[0].src = this;
+        // Alternatively you could use:
+        // (new Image()).src = this;
+    });
 }
