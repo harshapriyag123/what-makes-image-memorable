@@ -6,14 +6,6 @@ $(document).ready(function() {
     // Save the original background color
     var originalBodyBackgroundColor = $('body').css('backgroundColor');
 
-    // Start off by hiding everything but the welcome text
-    $('#game').hide();
-    $('#thanks').hide();
-
-    // Hide game components by default
-    $('#currentimage').hide();
-    $('#seen').hide();
-
     // Set up navigation buttons
     $('#getstarted').click(function() {
         $('#welcome').hide();
@@ -51,7 +43,8 @@ $(document).ready(function() {
 });
 
 function playGame(imageURLs, displayTime, gapTime) {
-    // TODO: Add a loading screen while images preload?  (And ignore space bar?)
+    // TODO: Add a loading screen while images preload?  (And ignore space bar on other screen?)
+    //       I don't believe this will actually wait for preload to complete before starting.
     $('#currentimage').queue(function() { gameInProgress = true; $('#beforelevel').hide(); preload(imageURLs); $.dequeue(this); });
     // Display all of the imagess
     $.each(imageURLs, function(index, value) {
