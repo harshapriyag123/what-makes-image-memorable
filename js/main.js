@@ -16,6 +16,18 @@ $(document).ready(function() {
         $('#thanks').show();
     });
 
+    $('#logo').click(function() {
+        // #666 == rgb(102, 102, 102)
+        // #333 == rgb(51, 51, 51)
+        var alternateColor = 'rgb(51, 51, 51)';
+        var oldColor = $('body').css('backgroundColor');
+        if(oldColor != alternateColor) {
+            $('body').css('backgroundColor', alternateColor);
+        } else {
+            $('body').css('backgroundColor', originalBodyBackgroundColor);
+        }
+    });
+
     // Set up keyboard commands
     $(window).keypress(function(e) {
         var key = e.which;
