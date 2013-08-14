@@ -43,9 +43,12 @@ $(document).ready(function() {
 });
 
 function playGame(imageURLs, displayTime, gapTime) {
-    // TODO: Add a loading screen while images preload?  (And ignore space bar on other screen?)
-    //       I don't believe this will actually wait for preload to complete before starting.
-    $('#currentimage').queue(function() { gameInProgress = true; $('#beforelevel').hide(); preload(imageURLs); $.dequeue(this); });
+    $('#beforelevel').hide();
+    $('#loading').show(0);
+    preload(imageURLs);
+    $('#loading').hide(0)
+    // Loading is done
+    gameInProgress = true;
     // Display all of the imagess
     $.each(imageURLs, function(index, value) {
         $('#currentimage')

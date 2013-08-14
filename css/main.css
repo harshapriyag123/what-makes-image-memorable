@@ -155,7 +155,7 @@ h3 {
     width: 500px;
     font-size: 3em;
 }
-#game, #thanks, #currentimage, #seen {
+#loading, #game, #thanks, #currentimage, #seen {
     /* Will be revealed as needed via JavaScript */
     display: none;
 }
