@@ -1,22 +1,18 @@
-// Game state
-var gameInProgress = false;
-
-
-$(document).ready(function() {
+$(document).ready(function () {
     // Save the original background color
     var originalBodyBackgroundColor = $('body').css('backgroundColor');
 
     // Set up navigation buttons
-    $('#getstarted').click(function() {
+    $('#getstarted').click(function () {
         $('#welcome').hide();
         $('#game').show();
     });
-    $('#quit').click(function() {
+    $('#quit').click(function () {
         $('#game').hide();
         $('#thanks').show();
     });
 
-    $('#logo').click(function() {
+    $('#logo').click(function () {
         // #666 == rgb(102, 102, 102)
         // #333 == rgb(51, 51, 51)
         var alternateColor = 'rgb(51, 51, 51)';
@@ -29,12 +25,21 @@ $(document).ready(function() {
     });
 
     // Set up keyboard commands
-    $(window).keypress(function(e) {
-        var key = e.which;
+    $(window).keypress(function (e) {
+        var key = e.which,
+            imageUrls;
         if (key == 32) { // space bar
             e.preventDefault();
-            if(!gameInProgress) {
-                playGame(['img/test1.jpg', 'img/test2.jpg', 'img/test3.jpg', 'img/test4.jpg', 'img/test5.jpg', 'img/test6.jpg'], 1000, 1400);
+            if(!$('#currentimage').is(":visible")) {
+                // Load and start the game
+                imageUrls = ['img/test1.jpg', 'img/test2.jpg', 'img/test3.jpg', 'img/test4.jpg', 'img/test5.jpg', 'img/test6.jpg']; // This will be dynamic later
+                $('#beforelevel').hide();
+
+                preloadImages(imageUrls,
+                    function () {
+                        playGame(imageUrls, 1000, 1400);
+                    }
+                );
             } else {
                 $('#seen').show();
             }
@@ -42,32 +47,50 @@ $(document).ready(function() {
     });
 });
 
-function playGame(imageURLs, displayTime, gapTime) {
-    $('#beforelevel').hide();
-    $('#loading').show(0);
-    preload(imageURLs);
-    $('#loading').hide(0)
-    // Loading is done
-    gameInProgress = true;
+function playGame(imageUrls, displayTime, gapTime) {
+    // TODO: Add a countdown
+
     // Display all of the imagess
-    $.each(imageURLs, function(index, value) {
+    $.each(imageUrls, function (index, value) {
         $('#currentimage')
-            .queue(function() { $(this).attr('src', value); $.dequeue(this); })
+            .queue(function () { $(this).attr('src', value); $.dequeue(this); })
             .show(0)
             .delay(displayTime)
             .hide(0)
-            .queue(function() { $(this).attr('src', ''); $.dequeue(this); }) // not really necessary
+            .queue(function () { $(this).attr('src', ''); $.dequeue(this); }) // not really necessary
             .delay(gapTime)
-            .queue(function() { $('#seen').hide(); $.dequeue(this); });
+            .queue(function () { $('#seen').hide(); $.dequeue(this); });
     });
-    $('#currentimage').queue(function() { gameInProgress = false; $('#beforelevel').show(); $.dequeue(this); });
+    $('#currentimage').queue(function () { $('#beforelevel').show(); $.dequeue(this); });
 }
 
-// From http://stackoverflow.com/questions/476679/preloading-images-with-jquery
-function preload(imageURLs) {
-    $(imageURLs).each(function(){
-        $('<img/>')[0].src = this;
-        // Alternatively you could use:
-        // (new Image()).src = this;
-    });
+// Based on http://stackoverflow.com/questions/476679/preloading-images-with-jquery
+function preloadImages(imageUrls, callback) {
+    var loadedImageUrls = [], img, i, imageLoaded,
+        imageUrlCount = imageUrls.length;
+
+    $('#loadedcount').html("0/" + imageUrlCount);
+    $('#loading').show(0); // TODO: Perhaps don't show this if loading time is really fast.
+
+    imageLoaded = function () {
+        var loadedImageUrlCount;
+        
+        loadedImageUrls.push(imageUrls[i]);
+        loadedImageUrlCount = loadedImageUrls.length;
+        $('#loadedcount').html(loadedImageUrlCount + "/" + imageUrlCount);
+        // If all images have loaded, hide the load screan and call the callback
+        // TODO: Do something if not all images have loaded after a timeout
+        if (loadedImageUrlCount === imageUrlCount) {
+            $('#loading').hide(0);
+            if(callback) {
+                setTimeout(callback, 25);
+            }
+        }
+    };
+    
+    for(i = 0; i < imageUrlCount; i++) {
+        img = new Image();
+        img.onload = imageLoaded;
+        img.src = imageUrls[i];
+    }
 }
